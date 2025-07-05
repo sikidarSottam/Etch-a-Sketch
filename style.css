@@ -1,27 +1,67 @@
 body {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;  
-    justify-content: center;
-    min-height: 100vh; 
-    margin: 0; 
-    padding: 20px; 
-    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
-.container {
-            display: flex;
-            flex-wrap: wrap;
-            width: 480px; /* 16 squares * 30px */
-            height: 480px;
-            border: 5px solid black;
-        }
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
 
-        .square-grid {
-            width: 30px;
-            height: 30px;
-            box-sizing: border-box; /* Ensures borders don't increase square size */
-            border: 1px solid blue;
-        }
+.controls label {
+    font-weight: bold;
+}
+
+.controls input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.controls button:hover {
+    background-color: #45a049;
+}
+
+.clear-btn {
+    background-color: #f44336;
+}
+
+.clear-btn:hover {
+    background-color: #da190b;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #333;
+    margin: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.square-grid {
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
