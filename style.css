@@ -1,3 +1,17 @@
+:root {
+    /* Define CSS variables for easier theming/updates */
+    --primary-color: #4CAF50;
+    --primary-hover-color: #45a049;
+    --danger-color: #f44336;
+    --danger-hover-color: #da190b;
+    --secondary-color: #008CBA; /* For new buttons */
+    --secondary-hover-color: #007bb5;
+    --background-color: #f4f4f4;
+    --container-border-color: #333;
+    --square-border-color: #ddd;
+    --text-color: #333;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -6,62 +20,220 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Improved font */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50; /* Darker heading color */
+}
+
+header h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+header p {
+    font-size: 1.1em;
+    color: #555;
 }
 
 .controls {
     display: flex;
+    flex-wrap: wrap; /* Allows controls to wrap on smaller screens */
+    gap: 15px; /* Increased gap for better spacing */
+    align-items: center;
+    justify-content: center; /* Center controls horizontally */
+    margin-bottom: 25px;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.control-group {
+    display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow groups to wrap */
 }
 
 .controls label {
     font-weight: bold;
+    color: #555;
 }
 
 .controls input[type="number"] {
     width: 80px;
-    padding: 5px;
+    padding: 8px; /* Increased padding */
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
 }
 
-.controls button {
-    padding: 8px 16px;
+.controls input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.controls input[type="color"] {
+    -webkit-appearance: none; /* Remove default browser styling */
+    -moz-appearance: none;
+    appearance: none;
+    width: 40px; /* Adjust size */
+    height: 40px;
     border: none;
-    border-radius: 4px;
-    background-color: #4CAF50;
-    color: white;
+    padding: 0;
     cursor: pointer;
-    transition: background-color 0.3s;
+    background: none;
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Hide color picker borders */
+    box-shadow: 0 0 0 2px #ccc; /* Add a subtle border */
+    transition: box-shadow 0.3s;
+}
+
+.controls input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.controls input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+.controls input[type="color"]:hover {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+
+.controls button {
+    padding: 10px 18px; /* Increased padding */
+    border: none;
+    border-radius: 5px; /* Slightly more rounded */
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .controls button:hover {
-    background-color: #45a049;
+    background-color: var(--primary-hover-color);
+    transform: translateY(-1px); /* Subtle hover effect */
+}
+
+.controls button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .clear-btn {
-    background-color: #f44336;
+    background-color: var(--danger-color);
 }
 
 .clear-btn:hover {
-    background-color: #da190b;
+    background-color: var(--danger-hover-color);
+}
+
+.eraser-btn, .rainbow-btn {
+    background-color: var(--secondary-color);
+}
+
+.eraser-btn:hover, .rainbow-btn:hover {
+    background-color: var(--secondary-hover-color);
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid #333;
+    border: 2px solid var(--container-border-color);
     margin: 20px;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* More prominent shadow */
+    border-radius: 8px; /* Rounded corners for the grid container */
+    overflow: hidden; /* Ensures squares don't overflow rounded corners */
+    /* Max width/height to keep it responsive and not too large */
+    max-width: calc(100vh - 200px); /* Adjust based on controls height */
+    max-height: calc(100vh - 200px); /* Ensure it stays within viewport */
+    /* Ensure squares fit snugly without extra space */
+    line-height: 0;
+    font-size: 0;
 }
 
+/* Specific styling for when a square is hovered/drawn on */
 .square-grid {
     box-sizing: border-box;
-    border: 1px solid #ddd;
-    transition: background-color 0.2s;
+    border: 1px solid var(--square-border-color); /* Subtle border for grid lines */
+    transition: background-color 0.1s ease-out; /* Faster transition for drawing */
+    flex-shrink: 0; /* Prevent shrinking when flex items wrap */
+}
+
+/* Active state for mode buttons */
+.mode-active {
+    outline: 2px solid var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4);
+    transform: scale(1.02); /* Slight scale to indicate active */
+}
+
+.messages {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.messages.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.messages.success {
+    background-color: #28a745; /* Green for success */
+}
+
+.messages.error {
+    background-color: #dc3545; /* Red for error */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .control-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .controls button,
+    .controls input {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .controls input[type="color"] {
+        width: 100%; /* Also take full width, but maintain aspect ratio */
+        height: 40px; /* Keep height consistent */
+        border-radius: 5px; /* Change to square for better fit */
+        box-shadow: none; /* Remove circular shadow */
+    }
+
+    .controls input[type="color"]::-webkit-color-swatch {
+        border-radius: 5px; /* Match square button style */
+    }
 }

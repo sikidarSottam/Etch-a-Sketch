@@ -3,19 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Square Grid Generator</title>
+    <title>🎨 Interactive Grid Sketchpad 🎨</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
+    <header>
+        <h1>Grid Sketchpad</h1>
+        <p>Unleash your creativity on the digital canvas!</p>
+    </header>
+
     <div class="controls">
-        <label for="grid-size">Grid Size (1-100):</label>
-        <input type="number" id="grid-size" min="1" max="100" value="16">
-        <button class="create-btn">Create Grid</button>
-        <button class="clear-btn">Clear Grid</button>
-        <label for="color-picker">Pen Color:</label>
-        <input type="color" id="color-picker" value="#333333">
+        <div class="control-group">
+            <label for="grid-size">Grid Size:</label>
+            <input type="number" id="grid-size" min="1" max="100" value="16">
+            <button class="create-btn">Create Grid</button>
+        </div>
+
+        <div class="control-group">
+            <label for="color-picker">Pen Color:</label>
+            <input type="color" id="color-picker" value="#333333">
+        </div>
+
+        <div class="control-group">
+            <button class="eraser-btn">Eraser</button>
+            <button class="rainbow-btn">Rainbow Mode</button>
+            <button class="clear-btn">Clear All</button>
+        </div>
     </div>
+
     <div class="container"></div>
+
+    <div class="messages" id="messages"></div>
 </body>
 </html>
